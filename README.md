@@ -36,3 +36,12 @@ https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers.gi
 ```
 <p>2. Open the .sln file</p>
 <p>3. Run the project!</p>
+
+<h1>💻 Used Technologies</h1>
+  
+<p><img src="https://seeklogo.com/images/C/c-logo-43CE78FF9C-seeklogo.com.png" alt="C++" width="20" height="20"> C++ - Main Language</p>
+<p><img src="https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers/blob/master/Documentation/Raylib.svg" alt = "Raylib" width="30" height="20"> Raylib -Graphic Library</p>
+<p><img src="https://cdn.worldvectorlogo.com/logos/git-bash.svg" alt="Git" width="30" height="20"> Git - Source Control</p>
+<p><img src="https://cdn.worldvectorlogo.com/logos/word-1.svg" alt="Word" width="30" height="20"> MS Word - Documentation</p>
+<p><img src="https://cdn.worldvectorlogo.com/logos/powerpoint-2.svg" alt="PowerPoint" width="30" height="20"> MS PowerPoint - Presentation</p>
+<p><img src="https://cdn.worldvectorlogo.com/logos/excel-4.svg" alt="Excel" width="30" height="20"> MS Excel - QA Documentation</p>
