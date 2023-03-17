@@ -12,6 +12,9 @@
     <ClInclude Include="..\game\src\screens.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\raylib-master\src\raygui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
