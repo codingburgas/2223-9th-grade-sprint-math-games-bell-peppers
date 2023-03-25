@@ -3,6 +3,10 @@
 	Texture2D menu;
 	Vector2 position = { 0, 0 };
 	Rectangle frameRec;
+	Rectangle play = { 94, 365, 125, 65 };
+	Rectangle info = { 94, 550, 125, 65 };
+	Rectangle quit = { 94, 755, 125, 65 };
+	Rectangle exit = { 16, 10, 125, 65 };
 	int currentFrame = 0;
 	bool shouldClose = false;
 	const int timer = 300;
@@ -10,7 +14,6 @@
 	char arr1[2] = { '\0' };
 	Rectangle num1 = { 1005, 683, 15, 25 };
 	time_t start, end, diff, timeLeft = 0;
-
 void Initialize() {
 
 	InitWindow(1600, 1000, "Bombs");
@@ -62,15 +65,17 @@ void Update() {
 	if (currentFrame == 0) {
 		start = time(0);
 
-		DrawRectangle(94, 365, 125, 65, GREEN);
-
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseX() >= 94 && GetMouseX() <= 219 && GetMouseY() >= 365 && GetMouseY() <= 430) {
+		DrawRectangleRec(play, GREEN);
+		button playButton = { play };
+		button infoButton = { info };
+		button quitButton = { quit };
+		if (playButton.isClicked()) {
 			currentFrame = 1;
 		}
-		else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseX() >= 94 && GetMouseX() <= 209 && GetMouseY() >= 550 && GetMouseY() <= 605) {
+		else if (infoButton.isClicked()) {
 			currentFrame = 2;
 		}
-		else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseX() >= 94 && GetMouseX() <= 209 && GetMouseY() >= 755 && GetMouseY() <= 810) {
+		else if (quitButton.isClicked()) {
 			Close();
 		}
 	}
@@ -87,8 +92,8 @@ void Update() {
 		diff = end - start;
 
 		timeLeft = timer - diff;
-
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseX() >= 16 && GetMouseX() <= 141 && GetMouseY() >= 10 && GetMouseY() <= 75) {
+		button exitButton = { exit };
+		if (exitButton.isClicked()) {
 			currentFrame = 0;
 		}
 	}

@@ -1,5 +1,9 @@
 #pragma once
+
+#include "button.h"
+
 #include "raylib.h"
+
 #include <ctime>
 
 void Initialize();
