@@ -11,20 +11,38 @@ Rectangle info = { 30, 555, 150, 75 };
 Rectangle quit = { 28, 790, 150, 74 };
 Rectangle exit = { 4, 10, 210, 65 };
 Rectangle back = { 20, 5, 155, 50 };
-Rectangle maze = { 300, 1000, 30, 30 };
-int currentFrame = 0, strikes = 0;
+Rectangle maze = { 590, 852, 20, 20 };
+Rectangle finish = { 708, 693, 20, 20 };
+Rectangle up = { 741, 905, 10, 10 };
+Rectangle left = { 741, 922, 10, 10 };
+Rectangle right = { 741, 941, 10, 10 };
+Rectangle down = { 741, 960, 10, 10 };
+Rectangle box = { 505, 683, 250, 200 };
+int currentFrame = 1, strikes = 0;
 bool shouldClose = false;
 const int timer = 300;
-bool write = false;
-char arr1[3] = { '\0' };
-Rectangle num1 = { 1005, 683, 15, 25 };
+char arr1[2] = { '\0' };
+char arr2[2] = { '\0' };
+char arr3[2] = { '\0' };
+char arr4[2] = { '\0' };
+char arr5[2] = { '\0' };
+char arr6[2] = { '\0' };
+Rectangle write1 = { 1175, 879, 15, 25 };
+Rectangle write2 = { 1175, 919, 15, 25 };
+Rectangle write3 = { 1291, 879, 15, 25 };
+Rectangle write4 = { 1291, 919, 15, 25 };
+Rectangle write5 = { 1407, 879, 15, 25 };
+Rectangle write6 = { 1407, 919, 15, 25 };
+char correct1 = '1', correct2 = '6', correct3 = '5', correct4 = '3', correct5 = '4', correct6 = '7';
 time_t start, end, diff, timeLeft = 0;
 bool correct = false;
+int modules = 3;
 
 void Initialize() {
 	InitWindow(1920, 1080, "Bombs");
 	SetWindowIcon(icon);
 	SetTargetFPS(60);
+	ToggleFullscreen();
 	InitAudioDevice();
 	menu = LoadTexture("../resources/menu.png");
 	frameRec = { 0, 0, (float)menu.width / 5, (float)menu.height };
@@ -40,15 +58,9 @@ void Close() {
 	shouldClose = true;
 }
 
-void Update() {
-	UpdateMusicStream(music);
-
-	PlayMusicStream(music);
-
-	SetMusicVolume(music, 0.1);
-
-	frameRec.x = (float)currentFrame * (float)menu.width / 5;
-	if (CheckCollisionPointRec(GetMousePosition(), num1)) {
+void CheckNumber(char num[],Rectangle box, char correct, int& strikes) {
+	int write = false;
+	if (CheckCollisionPointRec(GetMousePosition(), box)) {
 		write = true;
 	}
 	else {
@@ -59,29 +71,43 @@ void Update() {
 	{
 
 		int key = GetCharPressed();
-
 		while (key > 0)
 		{
-			if ((key >= 32) && (key <= 125))
+			if ((key >= 48) && (key <= 57))
 			{
-				arr1[0] = (char)key;
-				arr1[1] = '\0';
+				if ((char)key == correct) {
+					num[0] = (char)key;
+					num[1] = '\0';
+				}
+				else {
+					strikes++;
+					return;
+				}
 			}
-
 			key = GetCharPressed();
 		}
 	}
+}
+void Update() {
+	UpdateMusicStream(music);
+
+	PlayMusicStream(music);
+
+	SetMusicVolume(music, (float)0.1);
+
+	frameRec.x = (float)currentFrame * (float)menu.width / 5;
+	
 	BeginDrawing();
 
-	ClearBackground(PURPLE);
+	ClearBackground(WHITE);
 
 	DrawTextureRec(menu, frameRec, position, WHITE);
-
-	
 
 	if (currentFrame == 0) {
 
 		start = time(0);
+
+		maze = { 590, 852, 20, 20 };
 
 		button playButton = { play };
 
@@ -101,12 +127,59 @@ void Update() {
 	}
 	else if (currentFrame == 1) {
 
-		DrawTextEx(font, "X  X", { 1212, 385 }, 80, 1, RED);
+		if(strikes == 1) {
+			DrawTextEx(font, "X ", { 1212, 385 }, 80, 1, RED);
+		}
+		else if (strikes == 2) {
+			currentFrame = 4;
+		}
 
-		/*DrawRectangleRec(num1, LIGHTGRAY);*/
-
+		CheckNumber(arr1, write1, correct1, strikes);
+		CheckNumber(arr2, write2, correct2, strikes);
+		CheckNumber(arr3, write3, correct3, strikes);
+		CheckNumber(arr4, write4, correct4, strikes);
+		CheckNumber(arr5, write5, correct5, strikes);
+		CheckNumber(arr6, write6, correct6, strikes);
 		DrawRectangleRec(maze, RED);
-		DrawText(arr1, 1005, 687, 26, BLACK);
+		button upButton = { up };
+		button leftButton = { left };
+		button rightButton = { right };
+		button downButton = { down };
+		if (upButton.isClicked()) {
+			(float)maze.y = (float)maze.y - 105;
+			if (!CheckCollisionRecs(box, maze)) {
+				(float)maze.y = (float)maze.y + 58;
+			}
+			
+		}
+		else if (leftButton.isClicked()) {
+			(float)maze.x = (float)maze.x - 58;
+			if (!CheckCollisionRecs(box, maze)) {
+				(float)maze.y = (float)maze.y + 58;
+			}
+		}
+		else if (rightButton.isClicked()) {
+			(float)maze.x = (float)maze.x + 58;
+			if (!CheckCollisionRecs(box, maze)) {
+				(float)maze.y = (float)maze.y - 58;
+			}
+		}
+		else if (downButton.isClicked()) {
+			(float)maze.y = (float)maze.y + 105;
+			if (!CheckCollisionRecs(box, maze)) {
+				(float)maze.y = (float)maze.y - 58;
+			}
+		}
+		if (CheckCollisionRecs(maze, finish)) {
+			currentFrame = 3;
+		}
+		/*DrawRectangleRec(write2, RED);*/
+		DrawText(arr1, 1178, 879, 28, WHITE);
+		DrawText(arr2, 1179, 921, 28, WHITE);
+		DrawText(arr3, 1292, 879, 28, WHITE);
+		DrawText(arr4, 1292, 921, 28, WHITE);
+		DrawText(arr5, 1404, 879, 28, WHITE);
+		DrawText(arr6, 1409, 921, 28, WHITE);
 		if (IsKeyPressed(KEY_ENTER) && arr1[0] == '1') {
 			correct = true;
 		}
@@ -121,6 +194,10 @@ void Update() {
 		diff = end - start;
 
 		timeLeft = timer - diff;
+
+		if (timeLeft == -1) {
+			currentFrame = 4;
+		}
 
 		button exitButton = { exit };
 

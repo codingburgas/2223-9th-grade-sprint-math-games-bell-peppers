@@ -13,3 +13,5 @@ bool ShouldClose();
 void Update();
 
 void Close();
+
+void CheckNumber();
