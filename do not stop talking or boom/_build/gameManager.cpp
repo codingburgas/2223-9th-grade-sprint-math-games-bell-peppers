@@ -21,8 +21,9 @@ void Initialize() {
 
 	InitWindow(1920, 1080, "Bombs");
 	SetTargetFPS(60);
+	ToggleFullscreen();
 	menu = LoadTexture("../resources/menu.png");
-	frameRec = { 0, 0, (float)menu.width, (float)menu.height };
+	frameRec = { 0, 0, (float)menu.width / 5, (float)menu.height };
 	font = LoadFont("../resources/font.ttf");
 }
 
@@ -35,7 +36,7 @@ void Close() {
 }
 
 void Update() {
-	frameRec.x = (float)currentFrame * (float)menu.width;
+	frameRec.x = (float)currentFrame * (float)menu.width / 5;
 	if (CheckCollisionPointRec(GetMousePosition(), num1)) {
 		write = true;
 	}
