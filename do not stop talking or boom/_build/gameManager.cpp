@@ -4,10 +4,11 @@ Texture2D menu;
 Font font;
 Vector2 position = { 0, 0 };
 Rectangle frameRec;
-Rectangle play = { 30, 415, 150, 82 };
-Rectangle info = { 30, 650, 150, 75 };
-Rectangle quit = { 28, 905, 150, 74 };
+Rectangle play = { 30, 355, 150, 82 };
+Rectangle info = { 30, 555, 150, 75 };
+Rectangle quit = { 28, 790, 150, 74 };
 Rectangle exit = { 16, 10, 125, 65 };
+Rectangle back = { 20, 5, 155, 50 };
 int currentFrame = 0, strikes = 0;
 bool shouldClose = false;
 const int timer = 300;
@@ -113,7 +114,8 @@ void Update() {
 	}
 
 	else if (currentFrame == 2) {
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+		button backButton = { back };
+		if (backButton.isClicked()) {
 
 			currentFrame = 0;
 		}
