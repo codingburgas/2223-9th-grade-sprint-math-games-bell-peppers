@@ -288,6 +288,7 @@ void Update() {
 		if (currentFrame == 4)
 		{
 			StopMusicStream(music);
+
 			PlaySound(soundLose);
 		}
 
@@ -297,7 +298,9 @@ void Update() {
 
 		if (firstModule && secondModule && thirdModule) {
 			StopMusicStream(music);
+
 			PlaySound(soundWin);
+
 			currentFrame = 3;
 		}
 	}
