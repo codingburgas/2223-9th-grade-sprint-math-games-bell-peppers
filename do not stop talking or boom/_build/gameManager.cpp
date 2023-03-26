@@ -7,7 +7,7 @@ Rectangle frameRec;
 Rectangle play = { 30, 355, 150, 82 };
 Rectangle info = { 30, 555, 150, 75 };
 Rectangle quit = { 28, 790, 150, 74 };
-Rectangle exit = { 16, 10, 125, 65 };
+Rectangle exit = { 4, 10, 210, 65 };
 Rectangle back = { 20, 5, 155, 50 };
 int currentFrame = 0, strikes = 0;
 bool shouldClose = false;
@@ -101,6 +101,8 @@ void Update() {
 		DrawTextEx(font, TextFormat("%i:%02i", timeLeft / 60, timeLeft % 60), { 763, 333 }, 70, 1, WHITE);
 
 		end = time(0);
+
+		DrawRectangleRec(exit, BLUE);
 
 		diff = end - start;
 
