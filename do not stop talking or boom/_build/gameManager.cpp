@@ -11,7 +11,7 @@ Image icon = LoadImage("../resources/icon.png");
 Rectangle play = { 30, 355, 150, 82 };
 Rectangle info = { 30, 555, 150, 75 };
 Rectangle quit = { 28, 790, 150, 74 };
-Rectangle exit = { 4, 10, 210, 65 };
+Rectangle exitRect = { 4, 10, 210, 65 };
 Rectangle back = { 20, 5, 155, 50 };
 Rectangle maze = { 590, 852, 20, 20 };
 Rectangle finish = { 708, 693, 20, 20 };
@@ -30,22 +30,15 @@ Rectangle seven = { 545, 480, 46, 46 };
 Rectangle eight = { 606, 480, 46, 46 };
 Rectangle nine = { 665, 480, 46, 46 };
 Rectangle zero = { 728, 480, 46, 46 };
+
 int currentFrame = 0, strikes = 0;
 bool shouldClose = false;
 const int timer = 300;
-char arr1[2] = { '\0' };
-char arr2[2] = { '\0' };
-char arr3[2] = { '\0' };
-char arr4[2] = { '\0' };
-char arr5[2] = { '\0' };
-char arr6[2] = { '\0' };
-Rectangle write1 = { 1175, 879, 15, 25 };
-Rectangle write2 = { 1175, 919, 15, 25 };
-Rectangle write3 = { 1291, 879, 15, 25 };
-Rectangle write4 = { 1291, 919, 15, 25 };
-Rectangle write5 = { 1407, 879, 15, 25 };
-Rectangle write6 = { 1407, 919, 15, 25 };
-char correct1 = '3', correct2 = '6', correct3 = '5', correct4 = '3', correct5 = '4', correct6 = '7';
+
+Rectangle calculatorModuleRect = { 1062, 645, 440, 340 };
+CalculatorModule calculatorModule = { calculatorModuleRect };
+Button calculatorModuleButton = { calculatorModuleRect };
+
 time_t start, end, diff, timeLeft = 0;
 int done = 0;
 int where = 0;
@@ -106,8 +99,6 @@ void CheckNumber(char num[], Rectangle box, char correct, int& strikes, int& don
 }
 void Update() {
 
-
-
 	UpdateMusicStream(music);
 
 	PlayMusicStream(music);
@@ -128,11 +119,11 @@ void Update() {
 
 		maze = { 590, 852, 20, 20 };
 
-		button playButton = { play };
+		Button playButton = { play };
 
-		button infoButton = { info };
+		Button infoButton = { info };
 
-		button quitButton = { quit };
+		Button quitButton = { quit };
 
 		if (playButton.isClicked()) {
 			currentFrame = 1;
@@ -153,48 +144,44 @@ void Update() {
 			currentFrame = 4;
 		}
 
+		if (calculatorModuleButton.isClicked()) {
+			bool isActive = calculatorModule.GetActive();
+			calculatorModule.SetActive(!isActive);
+		}
 
-		CheckNumber(arr1, write1, correct1, strikes, done);
-
-		CheckNumber(arr2, write2, correct2, strikes, done);
-
-		CheckNumber(arr3, write3, correct3, strikes, done);
-
-		CheckNumber(arr4, write4, correct4, strikes, done);
-
-		CheckNumber(arr5, write5, correct5, strikes, done);
-
-		CheckNumber(arr6, write6, correct6, strikes, done);
+		if (!calculatorModule.Update()) {
+			strikes++;
+		}
 
 		DrawRectangleRec(maze, RED);
 
-		button oneButton = { one };
+		Button oneButton = { one };
 
-		button twoButton = { two };
+		Button twoButton = { two };
 
-		button threeButton = { three };
+		Button threeButton = { three };
 
-		button fourButton = { four };
+		Button fourButton = { four };
 
-		button fiveButton = { five };
+		Button fiveButton = { five };
 
-		button sixButton = { six };
+		Button sixButton = { six };
 
-		button sevenButton = { seven };
+		Button sevenButton = { seven };
 
-		button eightButton = { eight };
+		Button eightButton = { eight };
 
-		button nineButton = { nine };
+		Button nineButton = { nine };
 
-		button zeroButton = { zero };
+		Button zeroButton = { zero };
 
-		button upButton = { up };
+		Button upButton = { up };
 
-		button leftButton = { left };
+		Button leftButton = { left };
 
-		button rightButton = { right };
+		Button rightButton = { right };
 
-		button downButton = { down };
+		Button downButton = { down };
 		DrawCircle(850, 210, 18, BLACK);
 		if (fiveButton.isClicked() && !firstModule) {
 			firstModule = true;
@@ -254,16 +241,10 @@ void Update() {
 			secondModule = true;
 			DrawCircle(850, 650, 15, GREEN);
 		}
+		
 		DrawCircle(1485, 660, 18, BLACK);
-		DrawText(arr1, 1178, 879, 28, WHITE);
-		DrawText(arr2, 1179, 921, 28, WHITE);
-		DrawText(arr3, 1292, 879, 28, WHITE);
-		DrawText(arr4, 1292, 921, 28, WHITE);
-		DrawText(arr5, 1404, 879, 28, WHITE);
-		DrawText(arr6, 1409, 921, 28, WHITE);
-		if (done == 6) {
-			thirdModule = true;
-		}
+		thirdModule = calculatorModule.IsCompleted();
+
 		if (thirdModule) {
 
 			DrawCircle(1485, 660, 15, GREEN);
@@ -280,15 +261,17 @@ void Update() {
 		if (timeLeft == -1) {
 			currentFrame = 4;
 			StopMusicStream(music);
+			SetSoundVolume(soundLose, 0.1);
 			PlaySound(soundLose);
+			
 		}
 
-		button exitButton = { exit };
+		Button exitButton = { exitRect };
 
 		if (currentFrame == 4)
 		{
 			StopMusicStream(music);
-
+			SetSoundVolume(soundLose, 0.1);
 			PlaySound(soundLose);
 		}
 
@@ -298,7 +281,7 @@ void Update() {
 
 		if (firstModule && secondModule && thirdModule) {
 			StopMusicStream(music);
-
+			SetSoundVolume(soundWin, 0.1);
 			PlaySound(soundWin);
 
 			currentFrame = 3;
@@ -306,7 +289,7 @@ void Update() {
 	}
 
 	else if (currentFrame == 2) {
-		button backButton = { back };
+		Button backButton = { back };
 		if (backButton.isClicked()) {
 
 			currentFrame = 0;

@@ -1,9 +1,9 @@
 #include "button.h"
 
-button::button(Rectangle rect) {
-	this->rect = rect;
+Button::Button(Rectangle rect) {
+	this->rect = rect;//confused
 }
 
-bool button::isClicked() {
+bool Button::isClicked() {
 	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(),this->rect);
 }

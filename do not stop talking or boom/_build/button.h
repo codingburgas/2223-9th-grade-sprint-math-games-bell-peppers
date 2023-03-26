@@ -1,9 +1,9 @@
 #pragma once
 #include "raylib.h"
 
-struct button {
+struct Button {
 public: 
-	button(Rectangle rect);
+	Button(Rectangle rect);
 
 	bool isClicked();
 
