@@ -18,7 +18,17 @@ Rectangle left = { 741, 922, 10, 10 };
 Rectangle right = { 741, 941, 10, 10 };
 Rectangle down = { 741, 960, 10, 10 };
 Rectangle box = { 505, 683, 250, 200 };
-int currentFrame = 1, strikes = 0;
+Rectangle one = { 487, 438, 46, 38 };
+Rectangle two = { 545, 438, 46, 38 };
+Rectangle three = { 606, 438, 46, 38 };
+Rectangle four = { 665, 438, 46, 38 };
+Rectangle five = { 728, 438, 46, 38 };
+Rectangle six = { 487, 480, 46, 46 };
+Rectangle seven = { 545, 480, 46, 46 };
+Rectangle eight = { 606, 480, 46, 46 };
+Rectangle nine = { 665, 480, 46, 46 };
+Rectangle zero = { 728, 480, 46, 46 };
+int currentFrame = 0, strikes = 0;
 bool shouldClose = false;
 const int timer = 300;
 char arr1[2] = { '\0' };
@@ -89,6 +99,7 @@ void CheckNumber(char num[],Rectangle box, char correct, int& strikes) {
 	}
 }
 void Update() {
+
 	UpdateMusicStream(music);
 
 	PlayMusicStream(music);
@@ -134,38 +145,86 @@ void Update() {
 			currentFrame = 4;
 		}
 
+		
 		CheckNumber(arr1, write1, correct1, strikes);
+
 		CheckNumber(arr2, write2, correct2, strikes);
+
 		CheckNumber(arr3, write3, correct3, strikes);
+
 		CheckNumber(arr4, write4, correct4, strikes);
+
 		CheckNumber(arr5, write5, correct5, strikes);
+
 		CheckNumber(arr6, write6, correct6, strikes);
+
 		DrawRectangleRec(maze, RED);
+
+		button oneButton = { one };
+
+		button twoButton = { two };
+
+		button threeButton = { three };
+
+		button fourButton = { four };
+
+		button fiveButton = { five };
+
+		button sixButton = { six };
+
+		button sevenButton = { seven };
+
+		button eightButton = { eight };
+
+		button nineButton = { nine };
+
+		button zeroButton = { zero };
+
 		button upButton = { up };
+
 		button leftButton = { left };
+
 		button rightButton = { right };
+
 		button downButton = { down };
-		if (upButton.isClicked()) {
+
+		if (fiveButton.isClicked()){
+			modules--;
+		}
+		else if (oneButton.isClicked() || twoButton.isClicked() || threeButton.isClicked() || fourButton.isClicked() || sixButton.isClicked() || sevenButton.isClicked() || eightButton.isClicked() || nineButton.isClicked() || zeroButton.isClicked())
+		{
+			strikes++;
+		}
+
+		if(upButton.isClicked()) {
+
 			(float)maze.y = (float)maze.y - 105;
+
 			if (!CheckCollisionRecs(box, maze)) {
 				(float)maze.y = (float)maze.y + 58;
 			}
 			
 		}
 		else if (leftButton.isClicked()) {
+
 			(float)maze.x = (float)maze.x - 58;
+
 			if (!CheckCollisionRecs(box, maze)) {
 				(float)maze.y = (float)maze.y + 58;
 			}
 		}
 		else if (rightButton.isClicked()) {
+
 			(float)maze.x = (float)maze.x + 58;
+
 			if (!CheckCollisionRecs(box, maze)) {
 				(float)maze.y = (float)maze.y - 58;
 			}
 		}
 		else if (downButton.isClicked()) {
+
 			(float)maze.y = (float)maze.y + 105;
+
 			if (!CheckCollisionRecs(box, maze)) {
 				(float)maze.y = (float)maze.y - 58;
 			}
