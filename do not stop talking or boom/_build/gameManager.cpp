@@ -4,6 +4,8 @@ Texture2D menu;
 Font font;
 Vector2 position = { 0, 0 };
 Music music;
+Sound soundWin;
+Sound soundLose;
 Rectangle frameRec;
 Image icon = LoadImage("../resources/icon.png");
 Rectangle play = { 30, 355, 150, 82 };
@@ -59,6 +61,8 @@ void Initialize() {
 	frameRec = { 0, 0, (float)menu.width / 5, (float)menu.height };
 	font = LoadFont("../resources/font.ttf");
 	music = LoadMusicStream("../resources/music.mp3");
+	soundWin = LoadSound("../resources/win.mp3");
+	soundLose = LoadSound("../resources/lose.mp3");
 }
 
 bool ShouldClose() {
@@ -69,7 +73,7 @@ void Close() {
 	shouldClose = true;
 }
 
-void CheckNumber(char num[],Rectangle box, char correct, int& strikes, int& done) {
+void CheckNumber(char num[], Rectangle box, char correct, int& strikes, int& done) {
 	int write = false;
 	if (CheckCollisionPointRec(GetMousePosition(), box)) {
 		write = true;
@@ -102,7 +106,7 @@ void CheckNumber(char num[],Rectangle box, char correct, int& strikes, int& done
 }
 void Update() {
 
-	
+
 
 	UpdateMusicStream(music);
 
@@ -111,7 +115,7 @@ void Update() {
 	SetMusicVolume(music, (float)0.1);
 
 	frameRec.x = (float)currentFrame * (float)menu.width / 5;
-	
+
 	BeginDrawing();
 
 	ClearBackground(WHITE);
@@ -142,14 +146,14 @@ void Update() {
 	}
 	else if (currentFrame == 1) {
 
-		if(strikes == 1) {
+		if (strikes == 1) {
 			DrawTextEx(font, "X ", { 1212, 385 }, 80, 1, RED);
 		}
 		else if (strikes == 2) {
 			currentFrame = 4;
 		}
 
-		
+
 		CheckNumber(arr1, write1, correct1, strikes, done);
 
 		CheckNumber(arr2, write2, correct2, strikes, done);
@@ -192,7 +196,7 @@ void Update() {
 
 		button downButton = { down };
 		DrawCircle(850, 210, 18, BLACK);
-		if (fiveButton.isClicked() && !firstModule){
+		if (fiveButton.isClicked() && !firstModule) {
 			firstModule = true;
 		}
 		if (firstModule) {
@@ -261,7 +265,7 @@ void Update() {
 			thirdModule = true;
 		}
 		if (thirdModule) {
-			
+
 			DrawCircle(1485, 660, 15, GREEN);
 		}
 
@@ -275,15 +279,25 @@ void Update() {
 
 		if (timeLeft == -1) {
 			currentFrame = 4;
+			StopMusicStream(music);
+			PlaySound(soundLose);
 		}
 
 		button exitButton = { exit };
 
+		if (currentFrame == 4)
+		{
+			StopMusicStream(music);
+			PlaySound(soundLose);
+		}
+
 		if (exitButton.isClicked()) {
 			currentFrame = 0;
 		}
-		
+
 		if (firstModule && secondModule && thirdModule) {
+			StopMusicStream(music);
+			PlaySound(soundWin);
 			currentFrame = 3;
 		}
 	}
@@ -295,6 +309,8 @@ void Update() {
 			currentFrame = 0;
 		}
 	}
+
+
 	EndDrawing();
 
 }
