@@ -1,7 +1,11 @@
 
 <p align = "center">
-  <img src="https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers/blob/master/Documentation/Bell%20peppers'%20logo.svg" width="550" text-align="center">
+  <img src="https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers/blob/master/Documentation/Bell%20peppers'%20logo.svg" width="425" text-align="center">
 </p>
+<div align = "center">
+ <img src = "https://img.shields.io/github/repo-size/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers?style=for-the-badge">
+  <img src = "https://img.shields.io/github/directory-file-count/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers?style=for-the-badge">
+</div>
 
 <hr>
 
