@@ -44,10 +44,34 @@ https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers.gi
 <h3> ➤ <a href="#">Test plan </a><img src="https://cdn.worldvectorlogo.com/logos/word-1.svg" alt="Word" width="30" height="20"/></h3>
 
 <h1>💻 Used Technologies</h1>
-  
-<p><img src="https://seeklogo.com/images/C/c-logo-43CE78FF9C-seeklogo.com.png" alt="C++" width="20" height="20"> C++ - Main Language</p>
-<p><img src="https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers/blob/master/Documentation/Raylib.svg" alt = "Raylib" width="30" height="20"> Raylib -Graphic Library</p>
-<p><img src="https://cdn.worldvectorlogo.com/logos/git-bash.svg" alt="Git" width="30" height="20"> Git - Source Control</p>
-<p><img src="https://cdn.worldvectorlogo.com/logos/word-1.svg" alt="Word" width="30" height="20"> MS Word - Documentation</p>
-<p><img src="https://cdn.worldvectorlogo.com/logos/powerpoint-2.svg" alt="PowerPoint" width="30" height="20"> MS PowerPoint - Presentation</p>
-<p><img src="https://cdn.worldvectorlogo.com/logos/excel-4.svg" alt="Excel" width="30" height="20"> MS Excel - QA Documentation</p>
+<h3> Used code editor & collaborative service:</h3> 
+<p align="left">
+  <p>
+    <img src="https://cdn.worldvectorlogo.com/logos/visual-studio-2013.svg" alt="Visual Studio 2022 logo" width=48px>
+    <img src="https://cdn.worldvectorlogo.com/logos/github-icon-1.svg" alt="GitHub logo" width=48px>
+    <img src="https://cdn.worldvectorlogo.com/logos/git-bash.svg" alt="Git" width=48px>
+  </p>
+</p>
+
+<h3>Used tools for our visual elements:</h3> 
+<p align="left">
+    <a href="https://www.figma.com/"><img src="https://img.icons8.com/color/344/figma--v1.png" alt="Figma logo" width=48px/></a>
+    
+</p>
+
+<h3>Used technologies for our project development:</h3> 
+<p align="left">
+    <p>
+    <img src="https://seeklogo.com/images/C/c-logo-43CE78FF9C-seeklogo.com.png" alt="C++" width=48px>
+    <img src="https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers/blob/master/Documentation/Raylib.svg" alt = "Raylib" width = 48px>
+    </p>
+</p>
+
+<h3>Used tools for our documentation, presentation & communication:</h3> 
+<p align="left">
+    <p>
+    <img src="https://cdn.worldvectorlogo.com/logos/word-1.svg" alt="Word" width=48px>
+    <img src="https://cdn.worldvectorlogo.com/logos/powerpoint-2.svg" alt="PowerPoint" width=48px>
+    <img src="https://cdn.worldvectorlogo.com/logos/excel-4.svg" alt="Excel" width=48px>
+    </p>
+</p>
