@@ -17,7 +17,7 @@ Rectangle up = { 741, 905, 10, 10 };
 Rectangle left = { 741, 922, 10, 10 };
 Rectangle right = { 741, 941, 10, 10 };
 Rectangle down = { 741, 960, 10, 10 };
-Rectangle box = { 505, 683, 250, 200 };
+Rectangle box = { 505, 683, 255, 205 };
 Rectangle one = { 487, 438, 46, 38 };
 Rectangle two = { 545, 438, 46, 38 };
 Rectangle three = { 606, 438, 46, 38 };
@@ -43,10 +43,11 @@ Rectangle write3 = { 1291, 879, 15, 25 };
 Rectangle write4 = { 1291, 919, 15, 25 };
 Rectangle write5 = { 1407, 879, 15, 25 };
 Rectangle write6 = { 1407, 919, 15, 25 };
-char correct1 = '1', correct2 = '6', correct3 = '5', correct4 = '3', correct5 = '4', correct6 = '7';
+char correct1 = '3', correct2 = '6', correct3 = '5', correct4 = '3', correct5 = '4', correct6 = '7';
 time_t start, end, diff, timeLeft = 0;
-bool correct = false;
-int modules = 3;
+int done = 0;
+int where = 0;
+bool firstModule = false, secondModule = false, thirdModule = false;
 
 void Initialize() {
 	InitWindow(1920, 1080, "Bombs");
@@ -68,7 +69,7 @@ void Close() {
 	shouldClose = true;
 }
 
-void CheckNumber(char num[],Rectangle box, char correct, int& strikes) {
+void CheckNumber(char num[],Rectangle box, char correct, int& strikes, int& done) {
 	int write = false;
 	if (CheckCollisionPointRec(GetMousePosition(), box)) {
 		write = true;
@@ -88,6 +89,7 @@ void CheckNumber(char num[],Rectangle box, char correct, int& strikes) {
 				if ((char)key == correct) {
 					num[0] = (char)key;
 					num[1] = '\0';
+					done++;
 				}
 				else {
 					strikes++;
@@ -99,6 +101,8 @@ void CheckNumber(char num[],Rectangle box, char correct, int& strikes) {
 	}
 }
 void Update() {
+
+	
 
 	UpdateMusicStream(music);
 
@@ -146,17 +150,17 @@ void Update() {
 		}
 
 		
-		CheckNumber(arr1, write1, correct1, strikes);
+		CheckNumber(arr1, write1, correct1, strikes, done);
 
-		CheckNumber(arr2, write2, correct2, strikes);
+		CheckNumber(arr2, write2, correct2, strikes, done);
 
-		CheckNumber(arr3, write3, correct3, strikes);
+		CheckNumber(arr3, write3, correct3, strikes, done);
 
-		CheckNumber(arr4, write4, correct4, strikes);
+		CheckNumber(arr4, write4, correct4, strikes, done);
 
-		CheckNumber(arr5, write5, correct5, strikes);
+		CheckNumber(arr5, write5, correct5, strikes, done);
 
-		CheckNumber(arr6, write6, correct6, strikes);
+		CheckNumber(arr6, write6, correct6, strikes, done);
 
 		DrawRectangleRec(maze, RED);
 
@@ -187,63 +191,78 @@ void Update() {
 		button rightButton = { right };
 
 		button downButton = { down };
-
-		if (fiveButton.isClicked()){
-			modules--;
+		DrawCircle(850, 210, 18, BLACK);
+		if (fiveButton.isClicked() && !firstModule){
+			firstModule = true;
+		}
+		if (firstModule) {
+			DrawCircle(850, 210, 15, GREEN);
+			DrawTextEx(font, "5", { 470,345 }, 80, 1, WHITE);
 		}
 		else if (oneButton.isClicked() || twoButton.isClicked() || threeButton.isClicked() || fourButton.isClicked() || sixButton.isClicked() || sevenButton.isClicked() || eightButton.isClicked() || nineButton.isClicked() || zeroButton.isClicked())
 		{
 			strikes++;
 		}
+		DrawCircle(850, 650, 18, BLACK);
+		if ((!CheckCollisionRecs(maze, finish))) {
+			if (upButton.isClicked()) {
 
-		if(upButton.isClicked()) {
 
-			(float)maze.y = (float)maze.y - 105;
+				if (where < 2 && CheckCollisionRecs(box, maze)) {
+					(float)maze.y = (float)maze.y - 105;
+					where++;
+					if (where == 2) {
+						(float)maze.y = (float)maze.y + 58;
+					}
+				}
 
-			if (!CheckCollisionRecs(box, maze)) {
-				(float)maze.y = (float)maze.y + 58;
 			}
-			
-		}
-		else if (leftButton.isClicked()) {
+			else if (leftButton.isClicked()) {
 
-			(float)maze.x = (float)maze.x - 58;
+				(float)maze.x = (float)maze.x - 58;
 
-			if (!CheckCollisionRecs(box, maze)) {
-				(float)maze.y = (float)maze.y + 58;
+				if (!CheckCollisionRecs(box, maze)) {
+
+					(float)maze.x = (float)maze.x + 58;
+				}
+			}
+			else if (rightButton.isClicked()) {
+
+				(float)maze.x = (float)maze.x + 58;
+
+				if (!CheckCollisionRecs(box, maze)) {
+
+					(float)maze.x = (float)maze.x - 58;
+				}
+			}
+			else if (downButton.isClicked()) {
+
+				if (where > 0 && CheckCollisionRecs(box, maze)) {
+					(float)maze.y = (float)maze.y + 105;
+					where--;
+					if (where == 0) {
+						(float)maze.y = (float)maze.y - 58;
+					}
+				}
 			}
 		}
-		else if (rightButton.isClicked()) {
-
-			(float)maze.x = (float)maze.x + 58;
-
-			if (!CheckCollisionRecs(box, maze)) {
-				(float)maze.y = (float)maze.y - 58;
-			}
+		else {
+			secondModule = true;
+			DrawCircle(850, 650, 15, GREEN);
 		}
-		else if (downButton.isClicked()) {
-
-			(float)maze.y = (float)maze.y + 105;
-
-			if (!CheckCollisionRecs(box, maze)) {
-				(float)maze.y = (float)maze.y - 58;
-			}
-		}
-		if (CheckCollisionRecs(maze, finish)) {
-			currentFrame = 3;
-		}
-		/*DrawRectangleRec(write2, RED);*/
+		DrawCircle(1485, 660, 18, BLACK);
 		DrawText(arr1, 1178, 879, 28, WHITE);
 		DrawText(arr2, 1179, 921, 28, WHITE);
 		DrawText(arr3, 1292, 879, 28, WHITE);
 		DrawText(arr4, 1292, 921, 28, WHITE);
 		DrawText(arr5, 1404, 879, 28, WHITE);
 		DrawText(arr6, 1409, 921, 28, WHITE);
-		if (IsKeyPressed(KEY_ENTER) && arr1[0] == '1') {
-			correct = true;
+		if (done == 6) {
+			thirdModule = true;
 		}
-		if (correct) {
-			DrawCircle(10, 10, 10, GREEN);
+		if (thirdModule) {
+			
+			DrawCircle(1485, 660, 15, GREEN);
 		}
 
 		DrawTextEx(font, TextFormat("%i:%02i", timeLeft / 60, timeLeft % 60), { 1135, 183 }, 180, 1, WHITE);
@@ -262,6 +281,10 @@ void Update() {
 
 		if (exitButton.isClicked()) {
 			currentFrame = 0;
+		}
+		
+		if (firstModule && secondModule && thirdModule) {
+			currentFrame = 3;
 		}
 	}
 
