@@ -44,7 +44,7 @@ void Update() {
 
 	PlayMusicStream(music);
 
-	SetMusicVolume(music, 0.01);
+	SetMusicVolume(music, 0.1);
 
 	frameRec.x = (float)currentFrame * (float)menu.width / 5;
 	if (CheckCollisionPointRec(GetMousePosition(), num1)) {
@@ -79,10 +79,6 @@ void Update() {
 	
 
 	if (currentFrame == 0) {
-
-		SetMusicVolume(music, 1);
-
-		PlayMusicStream(music);
 
 		start = time(0);
 
