@@ -3,6 +3,7 @@
 Texture2D menu;
 Font font;
 Vector2 position = { 0, 0 };
+Music music;
 Rectangle frameRec;
 Rectangle play = { 30, 355, 150, 82 };
 Rectangle info = { 30, 555, 150, 75 };
@@ -23,9 +24,11 @@ void Initialize() {
 	InitWindow(1920, 1080, "Bombs");
 	SetTargetFPS(60);
 	ToggleFullscreen();
+	InitAudioDevice();
 	menu = LoadTexture("../resources/menu.png");
 	frameRec = { 0, 0, (float)menu.width / 5, (float)menu.height };
 	font = LoadFont("../resources/font.ttf");
+	music = LoadMusicStream("../resources/music.mp3");
 }
 
 bool ShouldClose() {
@@ -37,6 +40,12 @@ void Close() {
 }
 
 void Update() {
+	UpdateMusicStream(music);
+
+	PlayMusicStream(music);
+
+	SetMusicVolume(music, 0.01);
+
 	frameRec.x = (float)currentFrame * (float)menu.width / 5;
 	if (CheckCollisionPointRec(GetMousePosition(), num1)) {
 		write = true;
@@ -67,7 +76,14 @@ void Update() {
 
 	DrawTextureRec(menu, frameRec, position, WHITE);
 
+	
+
 	if (currentFrame == 0) {
+
+		SetMusicVolume(music, 1);
+
+		PlayMusicStream(music);
+
 		start = time(0);
 
 		button playButton = { play };
