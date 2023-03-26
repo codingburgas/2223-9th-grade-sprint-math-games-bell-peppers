@@ -88,7 +88,7 @@ void Update() {
 	}
 	else if (currentFrame == 1) {
 
-		DrawTextEx(font, "X  X", { 785, 405 }, 45, 1, RED);
+		DrawTextEx(font, "X  X", { 1212, 385 }, 80, 1, RED);
 
 		/*DrawRectangleRec(num1, LIGHTGRAY);*/
 
