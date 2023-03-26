@@ -70,10 +70,12 @@ void Update() {
 	if (currentFrame == 0) {
 		start = time(0);
 
-		DrawRectangleRec(quit, GREEN);
 		button playButton = { play };
+
 		button infoButton = { info };
+
 		button quitButton = { quit };
+
 		if (playButton.isClicked()) {
 			currentFrame = 1;
 		}
@@ -98,11 +100,9 @@ void Update() {
 			DrawCircle(10, 10, 10, GREEN);
 		}
 
-		DrawTextEx(font, TextFormat("%i:%02i", timeLeft / 60, timeLeft % 60), { 763, 333 }, 70, 1, WHITE);
+		DrawTextEx(font, TextFormat("%i:%02i", timeLeft / 60, timeLeft % 60), { 1135, 183 }, 180, 1, WHITE);
 
 		end = time(0);
-
-		DrawRectangleRec(exit, BLUE);
 
 		diff = end - start;
 
