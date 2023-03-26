@@ -8,7 +8,7 @@ Rectangle play = { 30, 415, 150, 82 };
 Rectangle info = { 30, 650, 150, 75 };
 Rectangle quit = { 28, 905, 150, 74 };
 Rectangle exit = { 16, 10, 125, 65 };
-int currentFrame = 0, strikes = 1;
+int currentFrame = 0, strikes = 0;
 bool shouldClose = false;
 const int timer = 300;
 bool write = false;
