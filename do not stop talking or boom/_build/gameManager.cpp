@@ -5,11 +5,13 @@ Font font;
 Vector2 position = { 0, 0 };
 Music music;
 Rectangle frameRec;
+Image icon = LoadImage("../resources/icon.png");
 Rectangle play = { 30, 355, 150, 82 };
 Rectangle info = { 30, 555, 150, 75 };
 Rectangle quit = { 28, 790, 150, 74 };
 Rectangle exit = { 4, 10, 210, 65 };
 Rectangle back = { 20, 5, 155, 50 };
+Rectangle maze = { 300, 1000, 30, 30 };
 int currentFrame = 0, strikes = 0;
 bool shouldClose = false;
 const int timer = 300;
@@ -20,10 +22,9 @@ time_t start, end, diff, timeLeft = 0;
 bool correct = false;
 
 void Initialize() {
-
 	InitWindow(1920, 1080, "Bombs");
+	SetWindowIcon(icon);
 	SetTargetFPS(60);
-	ToggleFullscreen();
 	InitAudioDevice();
 	menu = LoadTexture("../resources/menu.png");
 	frameRec = { 0, 0, (float)menu.width / 5, (float)menu.height };
@@ -104,6 +105,7 @@ void Update() {
 
 		/*DrawRectangleRec(num1, LIGHTGRAY);*/
 
+		DrawRectangleRec(maze, RED);
 		DrawText(arr1, 1005, 687, 26, BLACK);
 		if (IsKeyPressed(KEY_ENTER) && arr1[0] == '1') {
 			correct = true;
