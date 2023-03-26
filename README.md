@@ -44,8 +44,8 @@ https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers.gi
 <h1>📄 Documentation</h1>
 <h3> ➤ <a href="https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers/blob/master/Documentation/Documentation.docx">Documentation</a><img src="https://cdn.worldvectorlogo.com/logos/word-1.svg" alt="Word" width="30" height="20"/> </h3>
 <h3> ➤ <a href="https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers/blob/master/Documentation/Presentation.pptx">Presentation </a><img src="https://cdn.worldvectorlogo.com/logos/powerpoint-2.svg" alt="PowerPoint" width="30" height="20"/> </h3>
-<h3> ➤ <a href="#">QA documentation </a><img src="https://cdn.worldvectorlogo.com/logos/excel-4.svg" alt="Word" width="30" height="20"/></h3>
-<h3> ➤ <a href="#">Test plan </a><img src="https://cdn.worldvectorlogo.com/logos/word-1.svg" alt="Word" width="30" height="20"/></h3>
+<h3> ➤ <a href="https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers/blob/master/Documentation/QA.xlsx">QA documentation </a><img src="https://cdn.worldvectorlogo.com/logos/excel-4.svg" alt="Word" width="30" height="20"/></h3>
+
 
 <h1>💻 Used Technologies</h1>
 <h3> Used code editor & collaborative service:</h3> 
