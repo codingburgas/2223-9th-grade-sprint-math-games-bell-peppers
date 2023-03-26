@@ -7,6 +7,7 @@
 
 #include <ctime>
 
+//Main functions
 void Initialize();
 
 bool ShouldClose();
@@ -14,5 +15,3 @@ bool ShouldClose();
 void Update();
 
 void Close();
-
-void CheckNumber(char num[], Rectangle box, char correct, int& strikes, int& done);

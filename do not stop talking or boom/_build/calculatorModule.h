@@ -33,7 +33,7 @@ private:
 		{ 1407, 879, 15, 25 },
 		{ 1407, 919, 15, 25 }
 	};
-
+	//Define the correct answers
 	int correct[6] = { 3, 6, 5, 3, 4, 7 };
 	int currentIndex = 0;
 
