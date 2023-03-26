@@ -79,3 +79,6 @@ https://github.com/codingburgas/2223-9th-grade-sprint-math-games-bell-peppers.gi
     <img src="https://cdn.worldvectorlogo.com/logos/excel-4.svg" alt="Excel" width=48px>
     </p>
 </p>
+<hr>
+
+<h2><p align="center">Made with love by Bell peppers❤️</p></h2>
