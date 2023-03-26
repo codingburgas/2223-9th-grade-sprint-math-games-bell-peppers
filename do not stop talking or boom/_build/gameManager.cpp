@@ -1,26 +1,29 @@
 #include "gameManager.h"
 
-	Texture2D menu;
-	Vector2 position = { 0, 0 };
-	Rectangle frameRec;
-	Rectangle play = { 94, 365, 125, 65 };
-	Rectangle info = { 94, 550, 125, 65 };
-	Rectangle quit = { 94, 755, 125, 65 };
-	Rectangle exit = { 16, 10, 125, 65 };
-	int currentFrame = 0;
-	bool shouldClose = false;
-	const int timer = 300;
-	bool write = false;
-	char arr1[2] = { '\0' };
-	Rectangle num1 = { 1005, 683, 15, 25 };
-	time_t start, end, diff, timeLeft = 0;
+Texture2D menu;
+Font font;
+Vector2 position = { 0, 0 };
+Rectangle frameRec;
+Rectangle play = { 30, 415, 150, 82 };
+Rectangle info = { 30, 650, 150, 75 };
+Rectangle quit = { 28, 905, 150, 74 };
+Rectangle exit = { 16, 10, 125, 65 };
+int currentFrame = 0, strikes = 1;
+bool shouldClose = false;
+const int timer = 300;
+bool write = false;
+char arr1[3] = { '\0' };
+Rectangle num1 = { 1005, 683, 15, 25 };
+time_t start, end, diff, timeLeft = 0;
+bool correct = false;
+
 void Initialize() {
 
-	InitWindow(1600, 1000, "Bombs");
-
+	InitWindow(1920, 1080, "Bombs");
 	SetTargetFPS(60);
 	menu = LoadTexture("../resources/menu.png");
-	frameRec = { 0, 0, (float)menu.width / 3, (float)menu.height };
+	frameRec = { 0, 0, (float)menu.width, (float)menu.height };
+	font = LoadFont("../resources/font.ttf");
 }
 
 bool ShouldClose() {
@@ -32,7 +35,7 @@ void Close() {
 }
 
 void Update() {
-	frameRec.x = (float)currentFrame * (float)menu.width / 3;
+	frameRec.x = (float)currentFrame * (float)menu.width;
 	if (CheckCollisionPointRec(GetMousePosition(), num1)) {
 		write = true;
 	}
@@ -53,7 +56,7 @@ void Update() {
 				arr1[1] = '\0';
 			}
 
-			key = GetCharPressed();  // Check next character in the queue
+			key = GetCharPressed();
 		}
 	}
 	BeginDrawing();
@@ -65,7 +68,7 @@ void Update() {
 	if (currentFrame == 0) {
 		start = time(0);
 
-		DrawRectangleRec(play, GREEN);
+		DrawRectangleRec(quit, GREEN);
 		button playButton = { play };
 		button infoButton = { info };
 		button quitButton = { quit };
@@ -81,18 +84,28 @@ void Update() {
 	}
 	else if (currentFrame == 1) {
 
-		DrawRectangleRec(num1, LIGHTGRAY);
+		DrawTextEx(font, "X  X", { 785, 405 }, 45, 1, RED);
 
-		DrawText(arr1, 1005, 683, 40, MAROON);
+		/*DrawRectangleRec(num1, LIGHTGRAY);*/
 
-		DrawText(TextFormat("%i:%02i", timeLeft / 60, timeLeft % 60), 755, 336, 62, WHITE);
+		DrawText(arr1, 1005, 687, 26, BLACK);
+		if (IsKeyPressed(KEY_ENTER) && arr1[0] == '1') {
+			correct = true;
+		}
+		if (correct) {
+			DrawCircle(10, 10, 10, GREEN);
+		}
+
+		DrawTextEx(font, TextFormat("%i:%02i", timeLeft / 60, timeLeft % 60), { 763, 333 }, 70, 1, WHITE);
 
 		end = time(0);
 
 		diff = end - start;
 
 		timeLeft = timer - diff;
+
 		button exitButton = { exit };
+
 		if (exitButton.isClicked()) {
 			currentFrame = 0;
 		}
